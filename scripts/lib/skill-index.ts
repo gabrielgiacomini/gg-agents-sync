@@ -12,7 +12,7 @@
  * import {
  *   collectSkillIndexEntries,
  *   renderGeneratedSkillIndexFile,
- * } from "skills/agents-sync/scripts/lib/skill-index";
+ * } from ".agents/skills/agents-sync/scripts/lib/skill-index";
  *
  * const entries = collectSkillIndexEntries(repoRoot);
  * const markdown = renderGeneratedSkillIndexFile({

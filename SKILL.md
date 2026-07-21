@@ -64,16 +64,16 @@ At minimum, inspect in each repo:
 
 ```bash
 # Audit all guidance files across root + submodules
-npx tsx skills/agents-sync/scripts/audit-guidance-split.ts
+npx tsx .agents/skills/agents-sync/scripts/audit-guidance-split.ts
 
 # Audit root guidance alignment (lazy skill index + proxy stubs)
-npx tsx skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts
+npx tsx .agents/skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts
 
 # Initialize a sync session folder
-npx tsx skills/agents-sync/scripts/init-sync-session.ts --name "<session-name>"
+npx tsx .agents/skills/agents-sync/scripts/init-sync-session.ts --name "<session-name>"
 
 # Finalize and publish a session folder
-npx tsx skills/agents-sync/scripts/finalize-sync-session.ts --session-dir ".agents-sync/YYYY-MM-DD-session-name"
+npx tsx .agents/skills/agents-sync/scripts/finalize-sync-session.ts --session-dir ".agents-sync/YYYY-MM-DD-session-name"
 ```
 
 Add `--json` to either audit script for machine-readable output. Add `--strict` for non-zero exit on violations.
@@ -210,7 +210,7 @@ Use uppercase snake case topic files in each repo `docs/` directory:
 For diagnostic requests, run the inspection commands first before loading any reference files. Load only the subset the task needs.
 
 2. Initialize a timestamped session folder:
-   - `npx tsx skills/agents-sync/scripts/init-sync-session.ts --name "<session-name>"`
+   - `npx tsx .agents/skills/agents-sync/scripts/init-sync-session.ts --name "<session-name>"`
 3. Inventory guidance files across root + submodules.
 4. Audit whether `AGENTS.md` sections are too detailed and whether `CLAUDE.md` / `GEMINI.md` still match the required redirect stub.
 5. Create or update topic docs in each repo `docs/` folder.
@@ -220,7 +220,7 @@ For diagnostic requests, run the inspection commands first before loading any re
 9. If `skills/**` changed, run `npm run skills:sync` and record output.
 10. Summarize what was normalized and any remaining drift inside the session folder.
 11. Publish the completed session folder:
-    - `npx tsx skills/agents-sync/scripts/finalize-sync-session.ts --session-dir ".agents-sync/YYYY-MM-DD-session-name-selfexplanatory"`
+    - `npx tsx .agents/skills/agents-sync/scripts/finalize-sync-session.ts --session-dir ".agents-sync/YYYY-MM-DD-session-name-selfexplanatory"`
     - Add `--include-path <repo-relative-path>` when the same scoped publish should also include root-repo guidance/doc changes alongside the session folder.
 
 ## Script Inventory
@@ -289,7 +289,7 @@ After edits, run relevant checks in each touched repo:
 | Audit script reports missing `docs/HTML_CLASSES.md` reference | The `AGENTS.md` section references a topic doc that does not exist. Create the doc or remove the reference. | `references/split-rubric.md` |
 | `skills:sync` fails after guidance edits | Generated skill indexes may be out of date. Re-run `npm run skills:sync` from repo root after all guidance files are saved. | Workflow step 9 |
 | Proxy stub drift detected | `CLAUDE.md` or `GEMINI.md` contains content beyond a minimal redirect. Copy the expected stub from `references/split-rubric.md` and overwrite the file. | `references/split-rubric.md` |
-| Session folder not published | The finalize script was not run. Execute `npx tsx skills/agents-sync/scripts/finalize-sync-session.ts --session-dir <path>`. | Script Inventory |
+| Session folder not published | The finalize script was not run. Execute `npx tsx .agents/skills/agents-sync/scripts/finalize-sync-session.ts --session-dir <path>`. | Script Inventory |
 | Cross-repo policy inconsistency | One repo's `AGENTS.md` references another repo's `docs/` path. Each repo must have its own local topic doc. | Non-Negotiable Policy rule 4 |
 
 ## Local Corpus Layout

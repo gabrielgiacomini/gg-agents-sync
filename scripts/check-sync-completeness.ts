@@ -9,8 +9,8 @@
  * codes on invalid usage or unreadable sessions.
  * Flow: argv -> resolve session path -> evaluate `CHECKLIST_ITEMS` -> stdout (text or JSON) / stderr.
  *
- * @testing CLI: from the repository root, `npx tsx skills/agents-sync/scripts/check-sync-completeness.ts --latest` and confirm stdout lists the resolved session path plus checklist rows.
- * @testing CLI: from the repository root, `npx tsx skills/agents-sync/scripts/check-sync-completeness.ts --session .agents-sync/<existing-session-folder> --json` and confirm a single JSON object with `checklist`, `score`, and `canFinalize` fields.
+ * @testing CLI: from the repository root, `npx tsx .agents/skills/agents-sync/scripts/check-sync-completeness.ts --latest` and confirm stdout lists the resolved session path plus checklist rows.
+ * @testing CLI: from the repository root, `npx tsx .agents/skills/agents-sync/scripts/check-sync-completeness.ts --session .agents-sync/<existing-session-folder> --json` and confirm a single JSON object with `checklist`, `score`, and `canFinalize` fields.
  * @testing CLI: from the repository root, `npm run file-overview-standards:target-brief -- --file skills/agents-sync/scripts/check-sync-completeness.ts` and confirm the structural brief reports no issues.
  *
  * @see skills/agents-sync/scripts/finalize-sync-session.ts - Finalize script whose run artifacts and naming conventions this checker uses when inferring checklist rows such as publish and handoff steps.

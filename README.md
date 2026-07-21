@@ -75,10 +75,10 @@ Skip it when the task is editing source code, tests, or configuration without to
 
 | Script | Invocation | What it does |
 |--------|------------|-------------|
-| `audit-guidance-split.ts` | `npx tsx skills/agents-sync/scripts/audit-guidance-split.ts` | Audits `AGENTS.md` content, proxy stubs, and docs references across root + submodules |
-| `audit-root-guidance-skills-alignment.ts` | `npx tsx skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts` | Validates the root `AGENTS.md` lazy skill-index stanza, proxy stubs, and generated skill indexes |
-| `init-sync-session.ts` | `npx tsx skills/agents-sync/scripts/init-sync-session.ts --name "<name>"` | Creates a timestamped `.agents-sync/` working directory |
-| `finalize-sync-session.ts` | `npx tsx skills/agents-sync/scripts/finalize-sync-session.ts --session-dir <path>` | Publishes a session folder with an optional scoped commit |
+| `audit-guidance-split.ts` | `npx tsx .agents/skills/agents-sync/scripts/audit-guidance-split.ts` | Audits `AGENTS.md` content, proxy stubs, and docs references across root + submodules |
+| `audit-root-guidance-skills-alignment.ts` | `npx tsx .agents/skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts` | Validates the root `AGENTS.md` lazy skill-index stanza, proxy stubs, and generated skill indexes |
+| `init-sync-session.ts` | `npx tsx .agents/skills/agents-sync/scripts/init-sync-session.ts --name "<name>"` | Creates a timestamped `.agents-sync/` working directory |
+| `finalize-sync-session.ts` | `npx tsx .agents/skills/agents-sync/scripts/finalize-sync-session.ts --session-dir <path>` | Publishes a session folder with an optional scoped commit |
 
 Add `--json` or `--strict` to either audit script for CI-gate usage.
 
@@ -170,10 +170,10 @@ Run the split audit first to discover what needs fixing:
 
 ```bash
 # Audit AGENTS.md sections, proxy stubs, and docs references across root + submodules
-npx tsx skills/agents-sync/scripts/audit-guidance-split.ts
+npx tsx .agents/skills/agents-sync/scripts/audit-guidance-split.ts
 
 # Audit root AGENTS.md lazy skill-index stanza and generated skill indexes
-npx tsx skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts
+npx tsx .agents/skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts
 ```
 
 Add `--json` for machine-readable output; add `--strict` for CI-gate usage (non-zero exit on violations).
@@ -182,12 +182,12 @@ When violations are found, initialize a session folder and begin the sync workfl
 
 ```bash
 # Initialize a timestamped sync session folder
-npx tsx skills/agents-sync/scripts/init-sync-session.ts --name "guidance-split-pass"
+npx tsx .agents/skills/agents-sync/scripts/init-sync-session.ts --name "guidance-split-pass"
 
 # ... edit AGENTS.md, CLAUDE.md, GEMINI.md, and docs/*.md per split-rubric.md ...
 
 # Publish the completed session
-npx tsx skills/agents-sync/scripts/finalize-sync-session.ts \
+npx tsx .agents/skills/agents-sync/scripts/finalize-sync-session.ts \
   --session-dir ".agents-sync/2026-05-17-guidance-split-pass"
 ```
 
@@ -196,7 +196,7 @@ For CI gates, wire into `package.json`:
 ```json
 {
   "scripts": {
-    "check:guidance-skills-alignment": "npx tsx skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts --strict"
+    "check:guidance-skills-alignment": "npx tsx .agents/skills/agents-sync/scripts/audit-root-guidance-skills-alignment.ts --strict"
   }
 }
 ```
